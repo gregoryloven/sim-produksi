@@ -10,4 +10,5 @@ class Material extends Model
     use HasFactory;
     protected $table = 'materials';
     protected $primaryKey = 'id';
+    protected $guarded = [];
 }
