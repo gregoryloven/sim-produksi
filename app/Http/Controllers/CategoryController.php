@@ -40,7 +40,7 @@ class CategoryController extends Controller
         $data->nama = $request->nama;
         $data->save();
 
-        return redirect()->route('category.index')->withToastSuccess('success', 'Data kategori berhasil ditambah.');
+        return redirect()->route('category.index')->withToastSuccess('Data kategori berhasil ditambah');
     }
 
     /**
@@ -78,7 +78,7 @@ class CategoryController extends Controller
             'nama' => $request->nama,
         ]);
 
-        return redirect()->route('category.index')->with('success', 'Data kategori berhasil diupdate.');
+        return redirect()->route('category.index')->withToastSuccess('Data kategori berhasil diubah');
     }
 
     /**
@@ -87,9 +87,15 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
+
     public function destroy(Category $category)
     {
-        //
+        try {
+            $category->delete();
+            return redirect()->route('category.index')->withToastSuccess('Data kategori berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect()->route('category.index')->withToastError('Data kategori gagal dihapus');
+        }
     }
 
     public function EditForm(Request $request)
