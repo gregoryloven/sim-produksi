@@ -19,6 +19,7 @@ class CreateProductionsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->integer('qty_material');
             $table->unsignedBigInteger('material_id');
+            $table->string('status');
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('material_id')->references('id')->on('materials');
             $table->timestamps();

@@ -40,7 +40,7 @@ class CategoryController extends Controller
         $data->nama = $request->nama;
         $data->save();
 
-        return redirect()->route('category.index')->with('success', 'Data kategori berhasil ditambah.');
+        return redirect()->route('category.index')->withToastSuccess('success', 'Data kategori berhasil ditambah.');
     }
 
     /**
@@ -90,5 +90,15 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+    }
+
+    public function EditForm(Request $request)
+    {
+        $id = $request->get("id");
+        $data = Category::find($id);
+
+        return response()->json(array(
+            'status'=>'oke',
+            'msg'=>view('category.EditForm',compact('data'))->render()),200);
     }
 }
