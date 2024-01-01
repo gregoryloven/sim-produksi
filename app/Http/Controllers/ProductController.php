@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -15,7 +16,8 @@ class ProductController extends Controller
     public function index()
     {
         $data = Product::all();
-        return view('product.index', compact('data'));
+        $cat = Category::all();
+        return view('product.index', compact('data', 'cat'));
     }
 
     /**
@@ -40,6 +42,7 @@ class ProductController extends Controller
         $data->kode = $request->kode;
         $data->nama = $request->nama;
         $data->category_id = $request->category_id;
+        $data->harga = str_replace('.', '', $request->harga);
         
         $file=$request->file('foto');
         $imgFolder = 'foto/';
@@ -50,7 +53,7 @@ class ProductController extends Controller
 
         $data->save();
 
-        return redirect()->route('product.index')->with('success', 'Data product berhasil ditambah.');
+        return redirect()->route('product.index')->withToastSuccess('Data produk berhasil ditambah');
     }
 
     /**
@@ -86,6 +89,9 @@ class ProductController extends Controller
     {
         $product->kode = $request->kode;
         $product->nama = $request->nama;
+        $product->category_id = $request->category_id;
+        $product->harga = $request->harga;
+        $product->harga = str_replace('.', '', $request->harga);
 
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
@@ -104,7 +110,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('product.index')->with('success', 'Data product berhasil diubah.');
+        return redirect()->route('product.index')->withToastSuccess('Data produk berhasil diubah');
     }
 
     /**
@@ -115,6 +121,29 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        try {
+            $imgFolder = 'foto/';
+            $filePath = $imgFolder . $product->foto;
+
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+            $product->delete();
+            
+            return redirect()->route('product.index')->withToastSuccess('Data produk berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect()->route('product.index')->withToastError('Data produk gagal dihapus');
+        }
+    }
+
+    public function EditForm(Request $request)
+    {
+        $id = $request->get("id");
+        $data = Product::find($id);
+        $cat = Category::all();
+
+        return response()->json(array(
+            'status'=>'oke',
+            'msg'=>view('product.EditForm',compact('data', 'cat'))->render()),200);
     }
 }

@@ -5,9 +5,9 @@
             </div>
             <ul class="sidebar-menu">
                 <li><a class="nav-link" href="/"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
-                <li><a class="nav-link" href="/category"><i class="fas fa-list-alt"></i> <span>Category</span></a></li>
+                <li><a class="nav-link" href="/category"><i class="fas fa-list-alt"></i> <span>Kategori</span></a></li>
                 <li><a class="nav-link" href="/material"><i class="fas fa-pencil-alt"></i> <span>Material</span></a></li>
-                <li><a class="nav-link" href="/product"><i class="fas fa-hammer"></i> <span>Product</span></a></li>
+                <li><a class="nav-link" href="/product"><i class="fas fa-hammer"></i> <span>Produk</span></a></li>
             </ul>
             
         </aside>
