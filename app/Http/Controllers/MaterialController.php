@@ -49,7 +49,7 @@ class MaterialController extends Controller
 
         $data->save();
 
-        return redirect()->route('material.index')->with('success', 'Data material berhasil ditambah.');
+        return redirect()->route('material.index')->withToastSuccess('Data material berhasil ditambah');
     }
 
     /**
@@ -103,7 +103,7 @@ class MaterialController extends Controller
 
         $material->save();
 
-        return redirect()->route('material.index')->with('success', 'Data material berhasil diubah.');
+        return redirect()->route('material.index')->withToastSuccess('Data material berhasil diubah');
     }
 
     /**
@@ -114,6 +114,28 @@ class MaterialController extends Controller
      */
     public function destroy(Material $material)
     {
-        //
+        try {
+            $imgFolder = 'foto/';
+            $filePath = $imgFolder . $material->foto;
+
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+            $material->delete();
+            
+            return redirect()->route('material.index')->withToastSuccess('Data material berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect()->route('material.index')->withToastError('Data material gagal dihapus');
+        }
+    }
+
+    public function EditForm(Request $request)
+    {
+        $id = $request->get("id");
+        $data = Material::find($id);
+
+        return response()->json(array(
+            'status'=>'oke',
+            'msg'=>view('material.EditForm',compact('data'))->render()),200);
     }
 }

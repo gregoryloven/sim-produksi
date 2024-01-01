@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MaterialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +21,7 @@ Route::get('/', function () {
 
 Route::resource('category', CategoryController::class);
 Route::post('/category/EditForm', [CategoryController::class, 'EditForm'])->name('category.EditForm');
+
+Route::resource('material', MaterialController::class);
+Route::post('/material/EditForm', [MaterialController::class, 'EditForm'])->name('material.EditForm');
 
