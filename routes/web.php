@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,6 @@ Route::post('/material/EditForm', [MaterialController::class, 'EditForm'])->name
 
 Route::resource('product', ProductController::class);
 Route::post('/product/EditForm', [ProductController::class, 'EditForm'])->name('product.EditForm');
+
+Route::resource('employee', EmployeeController::class);
+Route::post('/employee/EditForm', [EmployeeController::class, 'EditForm'])->name('employee.EditForm');
