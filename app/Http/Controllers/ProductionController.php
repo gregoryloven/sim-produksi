@@ -42,6 +42,8 @@ class ProductionController extends Controller
         $data->qty_material = $request->qty_material;
         $data->material_id = $request->material_id;
         $data->save();
+
+        return redirect()->route('production.index')->withToastSuccess('Data produksi berhasil ditambah');
     }
 
     /**
@@ -75,7 +77,12 @@ class ProductionController extends Controller
      */
     public function update(Request $request, Production $production)
     {
-        //
+        $production->qty_product = $request->qty_product;
+        $production->qty_material = $request->qty_material;
+        $production->material_id = $request->material_id;
+        $production->save();
+
+        return redirect()->route('production.index')->withToastSuccess('Data produksi berhasil diubah');
     }
 
     /**
@@ -86,6 +93,12 @@ class ProductionController extends Controller
      */
     public function destroy(Production $production)
     {
-        //
+        try {
+            $production->delete();
+            
+            return redirect()->route('production.index')->withToastSuccess('Data production berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect()->route('production.index')->withToastError('Data production gagal dihapus');
+        }
     }
 }
