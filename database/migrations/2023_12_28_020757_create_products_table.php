@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('kode');
             $table->string('nama');
             $table->unsignedBigInteger('category_id');
-            $table->integer('qty')->nullable();
+            $table->integer('stok')->nullable();
             $table->string('harga');
             $table->string('foto');
             $table->foreign('category_id')->references('id')->on('categories');

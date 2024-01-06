@@ -44,15 +44,30 @@ class ProductionController extends Controller
     public function store(Request $request)
     {   
         foreach ($request->material_id as $key => $materialId) {
-            $data = new Production();
-            $data->kode_produksi = sprintf("%03d", $request->kode_produksi + 1);
-            $data->qty_product = $request->qty_product;
-            $data->product_id = $request->product_id;
-            $data->qty_material = $request->qty_material[$key];
-            $data->material_id = $materialId;
-            $data->employee_id = $request->employee_id;
-            $data->save();
+            $data3 = Material::where('id', $materialId)->first();
+            if ($data3->qty < $request->qty_material[$key]) {
+                return redirect()->route('production.create')->withToastError('Stok bahan baku kurang, isi terlebih dahulu'); 
+            } else {
+                $data = new Production();
+                $data->kode_produksi = sprintf("%03d", $request->kode_produksi + 1);
+                $data->qty_product = $request->qty_product;
+                $data->product_id = $request->product_id;
+                $data->qty_material = $request->qty_material[$key];
+                $data->material_id = $materialId;
+                $data->employee_id = $request->employee_id;
+                $data->save();
+            }
         } 
+
+        $data2 = Product::where('id', $request->product_id)->first();
+        $data2->stok += $request->qty_product;
+        $data2->save();
+
+        foreach($request->material_id as $key => $materialId) {
+            $data3 = Material::where('id', $materialId)->first();
+            $data3->qty -= $request->qty_material[$key];
+            $data3->save();
+        }
 
         return redirect()->route('production.index')->withToastSuccess('Data produksi berhasil ditambah');
     }

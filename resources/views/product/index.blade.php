@@ -45,8 +45,8 @@
                                     <td>{{$d->nama}}</td>
                                     <td>{{$d->category->nama}}</td>
                                     <td>
-                                        @if(isset($d->qty))
-                                            {{ number_format($d->qty, 0, ',', '.') }}
+                                        @if(isset($d->stok))
+                                            {{ number_format($d->stok, 0, ',', '.') }}
                                         @else
                                             0
                                         @endif
