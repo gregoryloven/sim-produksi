@@ -38,7 +38,7 @@ class MaterialController extends Controller
     {
         $data = new Material();
         $data->nama = $request->nama;
-        $data->satuan = $request->satuan;
+        $data->qty = $request->qty;
         
         $file=$request->file('foto');
         $imgFolder = 'foto/';
@@ -84,7 +84,7 @@ class MaterialController extends Controller
     public function update(Request $request, Material $material)
     {
         $material->nama = $request->nama;
-        $material->satuan = $request->satuan;
+        $material->qty = $request->qty;
 
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
@@ -125,7 +125,7 @@ class MaterialController extends Controller
             
             return redirect()->route('material.index')->withToastSuccess('Data material berhasil dihapus');
         } catch (\Exception $e) {
-            return redirect()->route('material.index')->withToastError('Data material gagal dihapus');
+            return redirect()->route('material.index')->withToastError('Data material gagal dihapus karena digunakan pada data lain');
         }
     }
 

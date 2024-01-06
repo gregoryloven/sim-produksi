@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ProductionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,6 @@ Route::post('/product/EditForm', [ProductController::class, 'EditForm'])->name('
 
 Route::resource('employee', EmployeeController::class);
 Route::post('/employee/EditForm', [EmployeeController::class, 'EditForm'])->name('employee.EditForm');
+
+Route::resource('production', ProductionController::class);
+Route::post('/production/EditForm', [ProductionController::class, 'EditForm'])->name('production.EditForm');

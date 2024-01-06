@@ -10,15 +10,15 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-          <h1>Daftar Material</h1>
+          <h1>Daftar Bahan Baku</h1>
         </div>
 
         <div class="section-body">
-            <a href="#modalCreate" data-toggle='modal' class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah Material</a><br><br>
+            <a href="#modalCreate" data-toggle='modal' class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah Bahan Baku</a><br><br>
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    Daftar Material 
+                    Daftar Bahan Baku 
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -27,7 +27,7 @@
                                 <tr>
                                     <th width="10%">No</th>
                                     <th>Nama</th>
-                                    <th>Satuan</th>
+                                    <th>Jumlah (pcs)</th>
                                     <th>Foto</th>
                                     <th width="20%"><i class="fa fa-cog"></i></th>
                                 </tr>
@@ -39,7 +39,7 @@
                                 <tr>
                                     <td>@php echo $i; @endphp</td>
                                     <td>{{$d->nama}}</td>
-                                    <td>{{$d->satuan}}</td>
+                                    <td>{{$d->qty}}</td>
                                     <td><img src="{{asset('foto/'.$d->foto)}}" height='80px'/></td>
                                     <td>
                                         <form id="delete-form-{{ $d->id }}" action="{{ route('material.destroy', $d->id) }}" method="POST">
@@ -70,17 +70,22 @@
                 @csrf
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Tambah Material</h4>
+                    <h4 class="modal-title">Tambah Bahan Baku</h4>
                 </div>
                 <div class="modal-body">
                     @csrf
                     <div class="row">
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-9">
                             <label>Nama Material</label>
                             <input type="text" class="form-control" id='nama' name='nama' placeholder="Nama Material" required>
                         </div>
+
+                        <div class="form-group col-md-3">
+                            <label>Jumlah (pcs)</label>
+                            <input type="number" class="form-control" id='qty' name='qty' min=1 required>
+                        </div>
     
-                        <div class="form-group col-md-2 mr-2">
+                        <!-- <div class="form-group col-md-2 mr-2">
                             <label for="radioOption1">Satuan</label>
                             <div>
                                 <label class="radio-inline">
@@ -95,7 +100,7 @@
                                     <input type="radio" id="radioOption3" name="satuan" value="pcs"> pcs
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
                         
                     </div>
                     <div class="form-group">

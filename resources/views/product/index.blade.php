@@ -29,7 +29,7 @@
                                     <th>Kode</th>
                                     <th>Nama</th>
                                     <th>Kategori</th>
-                                    <th>Qty</th>
+                                    <th>Stok (pcs)</th>
                                     <th>Harga</th>
                                     <th>Foto</th>
                                     <th width="20%"><i class="fa fa-cog"></i></th>

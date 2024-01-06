@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Production;
+use App\Models\Product;
+use App\Models\Material;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class ProductionController extends Controller
@@ -25,7 +28,11 @@ class ProductionController extends Controller
      */
     public function create()
     {
-        //
+        $prod = Product::all();
+        $mat = Material::all();
+        $kar = Employee::all();
+        $data = Production::latest()->first();
+        return view('production.create', compact('data', 'prod', 'mat', 'kar'));
     }
 
     /**
@@ -35,13 +42,17 @@ class ProductionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $data = new Production();
-        $data->qty_product = $request->qty_product;
-        $data->product_id = $request->product_id;
-        $data->qty_material = $request->qty_material;
-        $data->material_id = $request->material_id;
-        $data->save();
+    {   
+        foreach ($request->material_id as $key => $materialId) {
+            $data = new Production();
+            $data->kode_produksi = sprintf("%03d", $request->kode_produksi + 1);
+            $data->qty_product = $request->qty_product;
+            $data->product_id = $request->product_id;
+            $data->qty_material = $request->qty_material[$key];
+            $data->material_id = $materialId;
+            $data->employee_id = $request->employee_id;
+            $data->save();
+        } 
 
         return redirect()->route('production.index')->withToastSuccess('Data produksi berhasil ditambah');
     }
@@ -96,9 +107,9 @@ class ProductionController extends Controller
         try {
             $production->delete();
             
-            return redirect()->route('production.index')->withToastSuccess('Data production berhasil dihapus');
+            return redirect()->route('production.index')->withToastSuccess('Data produksi berhasil dihapus');
         } catch (\Exception $e) {
-            return redirect()->route('production.index')->withToastError('Data production gagal dihapus');
+            return redirect()->route('production.index')->withToastError('Data produksi gagal dihapus');
         }
     }
 }

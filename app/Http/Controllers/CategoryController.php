@@ -94,7 +94,7 @@ class CategoryController extends Controller
             $category->delete();
             return redirect()->route('category.index')->withToastSuccess('Data kategori berhasil dihapus');
         } catch (\Exception $e) {
-            return redirect()->route('category.index')->withToastError('Data kategori gagal dihapus');
+            return redirect()->route('category.index')->withToastError('Data kategori gagal dihapus karena digunakan pada data lain');
         }
     }
 

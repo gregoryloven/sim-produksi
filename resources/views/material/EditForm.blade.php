@@ -13,7 +13,12 @@
                 <input type="text" class="form-control" value="{{$data->nama}}" id='nama' name='nama' required>
             </div>
 
-            <div class="form-group col-md-2 mr-2">
+            <div class="form-group col-md-3">
+                <label>Jumlah (pcs)</label>
+                <input type="number" class="form-control" value="{{$data->qty}}" id='qty' name='qty' min=1 required>
+            </div>
+
+            <!-- <div class="form-group col-md-2 mr-2">
                 <label for="radioOption1">Satuan</label>
                 <div>
                     <label class="radio-inline">
@@ -28,11 +33,11 @@
                         <input type="radio" id="radioOption3" name="satuan" value="pcs" {{$data->satuan == 'pcs' ? 'checked' : ''}}> pcs
                     </label>
                 </div>
-            </div>
+            </div> -->
 
             <div class="form-group">
                 <label>Foto</label>
-                <input type="file" value="{{$data->foto}}" name="foto" class="form-control" id="foto" placeholder="Foto" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" required>
+                <input type="file" value="{{$data->foto}}" name="foto" class="form-control" id="foto" placeholder="Foto" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
                 <img id="output" src="{{asset('foto/'.$data->foto)}}" width="200px" height="200px">
             </div>
 

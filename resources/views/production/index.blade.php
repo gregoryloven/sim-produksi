@@ -14,7 +14,7 @@
         </div>
 
         <div class="section-body">
-            <a href="#modalCreate" data-toggle='modal' class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah Produksi</a><br><br>
+            <a href="{{ url('production/create/') }}" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah Produksi</a><br><br>
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -64,45 +64,6 @@
     </section>
 </div>
 
-<!-- CREATE WITH MODAL -->
-<div class="modal fade" id="modalCreate" tabindex="-1" role="basic" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" >
-            <form role="form" method="POST" action="{{ url('production') }}" enctype="multipart/form-data">
-                @csrf
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Tambah Production</h4>
-                </div>
-                <div class="modal-body">
-                    @csrf
-                    <div class="row">
-                        <div class="form-group col-md-8">
-                            <label>Jumlah Produk</label>
-                            <input type="text" class="form-control" id='qty_product' name='qty_product' placeholder="Nama Material" required>
-                        </div>
-                        <div class="form-group col-md-8">
-                            <label>Nama Produk</label>
-                            <input type="text" class="form-control" id='nama' name='nama' placeholder="Nama Material" required>
-                        </div>
-    
-                        
-                    </div>
-                    <div class="form-group">
-                        <label>Foto</label>
-                        <input type="file" value="" name="foto" class="form-control" id="foto" placeholder="Foto" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])" required>
-                        <img id="output" width="200px" height="200px">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-info">Save</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 <!-- EDIT WITH MODAL-->
 <div class="modal fade" id="modalEdit" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog">
@@ -123,7 +84,7 @@ function EditForm(id)
 {
   $.ajax({
     type:'POST',
-    url:'{{route("material.EditForm")}}',
+    url:'{{route("production.EditForm")}}',
     data:{'_token':'<?php echo csrf_token() ?>',
           'id':id
          },

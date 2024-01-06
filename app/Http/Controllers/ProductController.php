@@ -132,7 +132,7 @@ class ProductController extends Controller
             
             return redirect()->route('product.index')->withToastSuccess('Data produk berhasil dihapus');
         } catch (\Exception $e) {
-            return redirect()->route('product.index')->withToastError('Data produk gagal dihapus');
+            return redirect()->route('product.index')->withToastError('Data produk gagal dihapus karena digunakan pada data lain');
         }
     }
 
