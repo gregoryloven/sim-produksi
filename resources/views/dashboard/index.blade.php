@@ -9,9 +9,6 @@
 @section('content')
 <div class="main-content">
     <section class="section">
-        <div class="section-header">
-          <h1>Daftar Kategori</h1>
-        </div>
 
         <div class="section-body">
 
@@ -38,7 +35,7 @@
 
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
-                        <div class="card-icon bg-primary">
+                        <div class="card-icon bg-warning">
                             <i class="fas fa-list-alt"></i>
                         </div>
                         <div class="card-wrap">
@@ -54,7 +51,7 @@
 
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
-                        <div class="card-icon bg-primary">
+                        <div class="card-icon bg-danger">
                             <i class="fas fa-pencil-alt"></i>
                         </div>
                         <div class="card-wrap">
@@ -70,7 +67,7 @@
 
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
-                        <div class="card-icon bg-primary">
+                        <div class="card-icon bg-success">
                             <i class="fas fa-shopping-bag"></i>
                         </div>
                         <div class="card-wrap">

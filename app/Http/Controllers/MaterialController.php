@@ -49,7 +49,7 @@ class MaterialController extends Controller
 
         $data->save();
 
-        return redirect()->route('material.index')->withToastSuccess('Data material berhasil ditambah');
+        return redirect()->route('material.index')->withToastSuccess('Data bahan baku berhasil ditambah');
     }
 
     /**
@@ -103,7 +103,7 @@ class MaterialController extends Controller
 
         $material->save();
 
-        return redirect()->route('material.index')->withToastSuccess('Data material berhasil diubah');
+        return redirect()->route('material.index')->withToastSuccess('Data bahan baku berhasil diubah');
     }
 
     /**
@@ -123,9 +123,9 @@ class MaterialController extends Controller
             }
             $material->delete();
             
-            return redirect()->route('material.index')->withToastSuccess('Data material berhasil dihapus');
+            return redirect()->route('material.index')->withToastSuccess('Data bahan baku berhasil dihapus');
         } catch (\Exception $e) {
-            return redirect()->route('material.index')->withToastError('Data material gagal dihapus karena digunakan pada data lain');
+            return redirect()->route('material.index')->withToastError('Data bahan baku gagal dihapus karena digunakan pada data lain');
         }
     }
 

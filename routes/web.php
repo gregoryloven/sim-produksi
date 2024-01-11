@@ -6,6 +6,7 @@ use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProductionController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,11 @@ use App\Http\Controllers\ProductionController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('dashboard.index');
+// });
+
+Route::get('/', [DashboardController::class, 'index']);
 
 Route::resource('category', CategoryController::class);
 Route::post('/category/EditForm', [CategoryController::class, 'EditForm'])->name('category.EditForm');
