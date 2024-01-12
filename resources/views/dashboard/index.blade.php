@@ -13,7 +13,7 @@
         <div class="section-body">
 
             <div class="section-header">
-                <h1>Selamat Datang,</h1>
+                <h1>Selamat Datang, {{Auth::user()->name}}</h1>
             </div>
 
             <div class="row">

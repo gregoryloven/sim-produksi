@@ -23,6 +23,8 @@ use App\Http\Controllers\DashboardController;
 //     return view('dashboard.index');
 // });
 
+route::middleware(['auth'])->group(function(){
+
 Route::get('/', [DashboardController::class, 'index']);
 
 Route::resource('category', CategoryController::class);
@@ -39,3 +41,10 @@ Route::post('/employee/EditForm', [EmployeeController::class, 'EditForm'])->name
 
 Route::resource('production', ProductionController::class);
 Route::post('/production/EditForm', [ProductionController::class, 'EditForm'])->name('production.EditForm');
+
+
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

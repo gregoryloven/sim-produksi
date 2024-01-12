@@ -1,7 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
             <div class="sidebar-brand">
-            <a href="/dashboard-admin">SIM Produksi</a>
+            <a href="/">SIM Produksi</a>
             </div>
             <ul class="sidebar-menu">
                 <li><a class="nav-link" href="/"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
