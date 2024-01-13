@@ -35,17 +35,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @php $i = 0; $i += 1; @endphp 
-                                @foreach($data as $produk)
+                                @php $i = 0; @endphp
+                                @foreach($data as $d)
+                                @php $i += 1; @endphp
                                 <tr>
-                                    <td>{{ $i }}</td>
-                                    <td >{{ $produk['kode_produksi'] }}</td>
-                                    <td >{{ $produk['qty_product'] }}</td>
-                                    <td>{{ $produk['product_id'] }} </td>
-                                    <td>{{ $produk['qty_material'] }}</td>
-                                    <td>{{ $produk['material_id'] }}</td>
-                                    <td></td>
-                                    $@php $i++; @endphp 
+                                    <td>@php echo $i; @endphp</td>
+                                    <td>{{$d->kode_produksi}}</td>
+                                    <td>{{$d->qty_product}}</td>
+                                    <td>{{$d->product->nama}}</td>
+                                    <td>{{$d->qty_material}}</td>
+                                    <td>{{$d->material->nama}}</td>
+                                    <td>
+                                        <form id="delete-form-{{ $d->id }}" action="{{ route('production.destroy', $d->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="#modalEdit" data-toggle="modal" class="btn btn-icon btn-warning" onclick="EditForm({{ $d->id }})"><i class="far fa-edit"></i></a>
+
+                                            <input type="hidden" class="form-control" id='id' name='id' placeholder="Type your name" value="{{$d->id}}">
+                                            <button type="button" class="btn btn-icon btn-danger" data-id="{{ $d->id }}"><i class="fa fa-trash"></i></button>                                   
+                                        </form>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

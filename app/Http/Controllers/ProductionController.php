@@ -18,7 +18,32 @@ class ProductionController extends Controller
     public function index()
     {
         $data = Production::all();
-        return view('production.index', compact('data'));
+
+        // Mengelompokkan data berdasarkan KodeProduksi dan NamaProduk
+        $groupedData = $data->groupBy(['kode_produksi']);
+
+        // Menyiapkan data untuk ditampilkan di view
+        $preparedData = [];
+
+        foreach ($groupedData as $kodeProduksi => $produkGroup) {
+            $rowSpan = count($produkGroup);
+            
+            foreach ($produkGroup as $index => $produk) {
+                // Menambahkan data dengan menentukan nilai colspan untuk baris pertama
+                $preparedData[] = [
+                    'kode_produksi' => $index == 0 ? $kodeProduksi : null,
+                    'product_id' => $index == 0 ? $produk->product_id : null,
+                    'qty_product' => $produk->qty_product,
+                    'qty_material' => $produk->qty_material,
+                    'material_id' => $produk->material_id,
+                    'RowSpan' => $rowSpan,
+                ];
+            }
+        }
+
+        return view('production.index', ['data' => $preparedData]);
+
+        // return view('production.index', compact('data'));
     }
 
     /**
