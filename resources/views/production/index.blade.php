@@ -29,23 +29,31 @@
                                     <th>Kode Produksi</th>
                                     <th>Jumlah Produksi</th>
                                     <th>Nama Produk</th>
-                                    <th>Jumlah Bahan Baku</th>
-                                    <th>Bahan Baku</th>
+                                    <th>Tanggal Produksi</th>
                                     <th width="20%"><i class="fa fa-cog"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @php $i = 0; $i += 1; @endphp 
-                                @foreach($data as $produk)
+                                @php $i = 0; @endphp
+                                @foreach($data as $d)
+                                @php $i += 1; @endphp
                                 <tr>
-                                    <td>{{ $i }}</td>
-                                    <td >{{ $produk['kode_produksi'] }}</td>
-                                    <td >{{ $produk['qty_product'] }}</td>
-                                    <td>{{ $produk['product_id'] }} </td>
-                                    <td>{{ $produk['qty_material'] }}</td>
-                                    <td>{{ $produk['material_id'] }}</td>
-                                    <td></td>
-                                    $@php $i++; @endphp 
+                                    <td>@php echo $i; @endphp</td>
+                                    <td>{{$d->kode_produksi}}</td>
+                                    <td>{{$d->qty_product}}</td>
+                                    <td>{{$d->product->nama}}</td>
+                                    <td>{{ \Carbon\Carbon::parse($d->created_at)->format('d-m-Y') }}</td>
+                                    <td>
+                                        <form id="delete-form-{{ $d->id }}" action="{{ route('production.destroy', $d->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <a href="{{ route('production.detail', $d->id) }}" class="btn btn-icon btn-info" ><i class="fa fa-search"></i></a>
+                                            
+                                            <input type="hidden" class="form-control" id='kode_produksi' name='kode_produksi' placeholder="Type your name" value="{{$d->kode_produksi}}">
+                                            <button type="button" class="btn btn-icon btn-danger" data-id="{{ $d->id }}"><i class="fa fa-trash"></i></button>                                   
+                                        </form>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

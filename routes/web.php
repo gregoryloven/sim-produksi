@@ -41,7 +41,7 @@ Route::post('/employee/EditForm', [EmployeeController::class, 'EditForm'])->name
 
 Route::resource('production', ProductionController::class);
 Route::post('/production/EditForm', [ProductionController::class, 'EditForm'])->name('production.EditForm');
-
+Route::get('/production/detail/{id}', [ProductionController::class, 'show'])->name('production.detail');
 
 });
 

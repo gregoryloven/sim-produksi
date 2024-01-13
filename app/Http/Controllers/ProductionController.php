@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\Material;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use DB;
+use Carbon;
 
 class ProductionController extends Controller
 {
@@ -17,33 +19,11 @@ class ProductionController extends Controller
      */
     public function index()
     {
-        $data = Production::all();
+        $data = Production::select('kode_produksi','qty_product','product_id','created_at', DB::raw('MIN(id) as id'))
+            ->groupBy('kode_produksi','qty_product','product_id','created_at')
+            ->get();
 
-        // Mengelompokkan data berdasarkan KodeProduksi dan NamaProduk
-        $groupedData = $data->groupBy(['kode_produksi']);
-
-        // Menyiapkan data untuk ditampilkan di view
-        $preparedData = [];
-
-        foreach ($groupedData as $kodeProduksi => $produkGroup) {
-            $rowSpan = count($produkGroup);
-            
-            foreach ($produkGroup as $index => $produk) {
-                // Menambahkan data dengan menentukan nilai colspan untuk baris pertama
-                $preparedData[] = [
-                    'kode_produksi' => $index == 0 ? $kodeProduksi : null,
-                    'product_id' => $index == 0 ? $produk->product_id : null,
-                    'qty_product' => $produk->qty_product,
-                    'qty_material' => $produk->qty_material,
-                    'material_id' => $produk->material_id,
-                    'RowSpan' => $rowSpan,
-                ];
-            }
-        }
-
-        return view('production.index', ['data' => $preparedData]);
-
-        // return view('production.index', compact('data'));
+        return view('production.index', compact('data'));
     }
 
     /**
@@ -103,9 +83,12 @@ class ProductionController extends Controller
      * @param  \App\Models\Production  $production
      * @return \Illuminate\Http\Response
      */
-    public function show(Production $production)
+    public function show($id)
     {
-        //
+        $cari = Production::find($id);
+        $data = Production::where('kode_produksi', $cari->kode_produksi)->get();
+
+        return view('production.detail', compact('data'));
     }
 
     /**
@@ -142,11 +125,14 @@ class ProductionController extends Controller
      * @param  \App\Models\Production  $production
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Production $production)
+    public function destroy(Request $request, Production $production)
     {
         try {
-            $production->delete();
-            
+            $cari = Production::where('kode_produksi', $request->kode_produksi)->get();
+            foreach($cari as $c) {
+                $c->delete();
+            }
+
             return redirect()->route('production.index')->withToastSuccess('Data produksi berhasil dihapus');
         } catch (\Exception $e) {
             return redirect()->route('production.index')->withToastError('Data produksi gagal dihapus');
