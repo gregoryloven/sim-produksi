@@ -59,7 +59,7 @@
                     @if (Route::has('login'))
                         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                             @auth
-                                <a href="{{ url('/employee') }}" class="btn btn-primary">Home</a>
+                                <a href="{{ url('/employee') }}" class="btn btn-primary font-weight-bold" style="font-size: 24px; padding: 16px 32px;">Home</a>
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-primary font-weight-bold" style="font-size: 24px; padding: 16px 32px;">Log in</a>
                                 <!-- Jika Anda ingin menampilkan tombol pendaftaran, tambahkan kode berikut -->
