@@ -4,7 +4,7 @@
             <a href="/">SIM Produksi</a>
             </div>
             <ul class="sidebar-menu">
-                <li><a class="nav-link" href="/"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
+                <li><a class="nav-link" href="/dashboard"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
                 <li><a class="nav-link" href="/employee"><i class="fas fa-users"></i> <span>Karyawan</span></a></li>
                 <li><a class="nav-link" href="/category"><i class="fas fa-list-alt"></i> <span>Kategori</span></a></li>
                 <li><a class="nav-link" href="/material"><i class="fas fa-pencil-alt"></i> <span>Bahan Baku</span></a></li>

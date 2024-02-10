@@ -23,10 +23,13 @@ use App\Http\Controllers\LaporanController;
 // Route::get('/', function () {
 //     return view('dashboard.index');
 // });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 route::middleware(['auth'])->group(function(){
 
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::resource('category', CategoryController::class);
 Route::post('/category/EditForm', [CategoryController::class, 'EditForm'])->name('category.EditForm');
