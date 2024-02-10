@@ -42,7 +42,7 @@
                                     <td>{{$d->kode_produksi}}</td>
                                     <td>{{$d->qty_product}}</td>
                                     <td>{{$d->product->nama}}</td>
-                                    <td>{{ \Carbon\Carbon::parse($d->created_at)->format('d-m-Y') }}</td>
+                                    <td>{{ tanggal_indonesia($d->created_at) }}</td>
                                     <td>
                                         <form id="delete-form-{{ $d->id }}" action="{{ route('production.destroy', $d->id) }}" method="POST">
                                             @csrf

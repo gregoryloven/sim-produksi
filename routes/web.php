@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProductionController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LaporanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,9 @@ Route::post('/employee/EditForm', [EmployeeController::class, 'EditForm'])->name
 Route::resource('production', ProductionController::class);
 Route::post('/production/EditForm', [ProductionController::class, 'EditForm'])->name('production.EditForm');
 Route::get('/production/detail/{id}', [ProductionController::class, 'show'])->name('production.detail');
+
+Route::get('laporan', [LaporanController::class, 'laporan'])->name('laporan.laporan');
+Route::post('/laporan/searchByDate', [LaporanController::class, 'searchByDate'])->name('laporan.searchByDate');
 
 });
 

@@ -36,7 +36,7 @@
                                 @endforeach
                             </ul>
                             <p style="margin-bottom: 5px;"><b>Karyawan Produksi : </b>{{ $d->employee->nama }}</p>
-                            <p style="margin-bottom: 5px;"><b>Tanggal Produksi : </b>{{ \Carbon\Carbon::parse($d['created_at'])->format('d-m-Y') }}</p>
+                            <p style="margin-bottom: 5px;"><b>Tanggal Produksi : </b>{{ tanggal_indonesia($d->created_at) }}</p>
 
                             {{-- Tambahkan ke koleksi data unik --}}
                             @php

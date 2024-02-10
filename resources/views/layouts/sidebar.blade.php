@@ -10,6 +10,7 @@
                 <li><a class="nav-link" href="/material"><i class="fas fa-pencil-alt"></i> <span>Bahan Baku</span></a></li>
                 <li><a class="nav-link" href="/product"><i class="fas fa-shopping-bag"></i> <span>Produk</span></a></li>
                 <li><a class="nav-link" href="/production"><i class="fas fa-hammer"></i> <span>Produksi</span></a></li>
+                <li><a class="nav-link" href="{{ route('laporan.laporan') }}"><i class="fas fa-book"></i> <span>Laporan</span></a></li>
                 <!-- <li><a class="nav-link" href="/penjualan"><i class="fas fa-shopping-cart"></i> <span>Penjualan</span></a></li> -->
             </ul>
             
